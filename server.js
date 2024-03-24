@@ -3,6 +3,7 @@ const express = require("express");
 const loanRouter = require("./router/loanRouter");
 const { connectDb } = require("./dbManager/mongoDb");
 const { productRouter } = require("./router/productRouter");
+const loggerMiddleware = require("./middleware/loggerMiddleware");
 
 
 //connecting to mongodb
@@ -14,7 +15,7 @@ const port = process.env.PORT || 3000;
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-
+app.use(loggerMiddleware);
 //routes
 
 app.get("/", (req, res) => {
